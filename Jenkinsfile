@@ -16,7 +16,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                sshagent(['your-credentials-id']) {
+                sshagent(['c399714c-c3a7-4fdd-b56a-a588ec0c41e9']) {
                     sh '''
                     ssh -o StrictHostKeyChecking=no ec2-user@your-ec2-instance-public-dns <<EOF
                     # 배포 디렉토리로 이동
