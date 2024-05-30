@@ -23,7 +23,7 @@ pipeline {
                     cd /path/to/deployment/directory
                     # 기존 아티팩트 백업
                     mv artifact.jar artifact.jar.bak
-                    # 빌드된 아티팩트 복사
+                    # 빌드된 아티팩트 복사.
                     cp /path/to/build/artifact.jar ./
                     # 기존 프로세스 종료
                     pkill -f 'java -jar artifact.jar'
