@@ -16,9 +16,9 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                sshagent(['c399714c-c3a7-4fdd-b56a-a588ec0c41e9']) {
+                sshagent(['tintin010']) {
                     sh '''
-                    ssh -o StrictHostKeyChecking=no ec2-user@your-ec2-instance-public-dns <<EOF
+                    ssh -o StrictHostKeyChecking=no ec2-user@ec2-43-202-61-53.ap-northeast-2.compute.amazonaws.com <<EOF
                     # 배포 디렉토리로 이동
                     cd /path/to/deployment/directory
                     # 기존 아티팩트 백업
