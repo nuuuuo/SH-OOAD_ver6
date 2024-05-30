@@ -17,16 +17,16 @@ public class MessageController implements Controller {
 
     private DVM myDVM;
 
+    public void MessageController() {
+        // TODO implement here
+    }
+
     @Override
     public void execute(String url, Socket connection) {
         // TODO implement here
     }
 
     public void reqLocation() {
-        // TODO implement here
-    }
-
-    public void MessageController() {
         // TODO implement here
     }
 
