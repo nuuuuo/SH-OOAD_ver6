@@ -88,24 +88,36 @@ pipeline {
             }
         }
         
-        stage('Deploy') {
+        // stage('Deploy') {
+        //     steps {
+        //         sshagent(['tintin010']) {
+        //             sh '''
+        //             ssh -o StrictHostKeyChecking=no ec2-user@ec2-43-202-61-53.ap-northeast-2.compute.amazonaws.com << 'EOF'
+        //             cd /home/ec2-user/deploy  # 실제 배포 디렉토리 경로
+        //             cp /var/lib/jenkins/workspace/jenkins0531/build/libs/ # 실제 빌드 파일 경로
+        //             currentPid=$(ps -ef | grep java | grep dokotlin | awk '{print $2}')
+        //             if [ -n "$currentPid" ]; then
+        //                 kill -9 $currentPid
+        //                 sleep 10
+        //             fi
+        //             nohup java -jar *.jar >> application.log 2>&1 &
+        //             '
+        //             '''
+        //         }
+        //     }
+        // }
             steps {
-                sshagent(['tintin010']) {
-                    sh '''
-                    ssh -o StrictHostKeyChecking=no ec2-user@ec2-43-202-61-53.ap-northeast-2.compute.amazonaws.com << 'EOF'
-                    cd /home/ec2-user/deploy  # 실제 배포 디렉토리 경로
-                    cp /var/lib/jenkins/workspace/jenkins0531/build/libs/ # 실제 빌드 파일 경로
-                    currentPid=$(ps -ef | grep java | grep dokotlin | awk '{print $2}')
-                    if [ -n "$currentPid" ]; then
-                        kill -9 $currentPid
-                        sleep 10
-                    fi
-                    nohup java -jar *.jar >> application.log 2>&1 &
-                    '
-                    '''
+                sshagent(['ec2-user']) {
+                    sh """
+                    scp -o StrictHostKeyChecking=no build/libs/DVM-1.0-SNAPSHOT.jar ec2-user@ec2-43-202-61-53.ap-northeast-2.compute.amazonaws.com:/home/ec2-user/
+                    ssh -o StrictHostKeyChecking=no ec2-user@ec2-43-202-61-53.ap-northeast-2.compute.amazonaws.com <<EOF
+                    cd /home/ec2-user/
+                    # 여기에 배포를 위한 추가 명령어를 추가하세요. 예: JAR 파일 실행
+                    java -jar DVM-1.0-SNAPSHOT.jar &
+                    EOF
+                    """
                 }
-            }
-        }
+        }        
     }
     
     post {
