@@ -28,7 +28,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 // 빌드된 JAR 파일을 배포 디렉토리로 복사합니다.
-                sh 'cp /path/to/your/application/build/libs/*.jar /home/ec2-user/deploy/'
+                // sh 'cp /path/to/your/application/build/libs/*.jar /home/ec2-user/deploy/'
         
                 // 배포 디렉토리의 권한을 확인합니다.
                 // sh 'ls -l /home/ec2-user/deploy/'
