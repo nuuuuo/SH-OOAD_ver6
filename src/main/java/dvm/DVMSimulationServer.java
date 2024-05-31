@@ -41,7 +41,7 @@ public class DVMSimulationServer {
 
                         dos.writeBytes("HTTP/1.1 200 OK \r\n");
                         dos.writeBytes("Content Type: text/html;charset=utf-8 \r\n\r\n");
-                        dos.writeBytes("Hello! -> " + method + " : " + url);
+                        dos.writeBytes("Hello World! -> " + method + " : " + url);
                         dos.flush();
                     } catch (IOException e) {
                         throw new RuntimeException(e);
