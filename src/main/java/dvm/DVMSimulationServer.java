@@ -13,7 +13,7 @@ public class DVMSimulationServer {
     public static void main(String[] args) {
         ControllerMapper mapper = new ControllerMapper();
 
-        int port = 12930;
+        int port = 9001;
         ExecutorService service = Executors.newFixedThreadPool(50);
 
         if (args.length != 0) {
