@@ -27,7 +27,8 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                // 빌드된 JAR 파일을 배포 디렉토리로 복사합니다.
+                // 빌드된 JAR 파일을 배포 디렉토리로 복사합니다..
+                
                 sh 'cp /path/to/your/application/build/libs/*.jar /home/ec2-user/deploy/'
 
                 // 현재 구동 중인 애플리케이션을 종료합니다.
