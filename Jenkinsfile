@@ -1,11 +1,21 @@
 pipeline {
     agent any
+
+    
     
     stages {
+
+        stage('github clone') {
+                steps {
+                   git branch: 'main', credentialsId: 'tintin010',
+                       url: 'https://github.com/KU-OOAD/DVM.git'
+            }
+        }
+        
         stage('Build') {
             steps {
                 sh 'echo "Building..."'
-                // 빌드 스크립트 추가
+                ./gradlew clean bootJar
             }
         }
         stage('Test') {
