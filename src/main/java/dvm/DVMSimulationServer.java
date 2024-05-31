@@ -20,9 +20,12 @@ public class DVMSimulationServer {
             port = Integer.parseInt(args[0]);
         }
 
+        System.out.println("Server is now loading...");
+
         try (ServerSocket welcomeSocket = new ServerSocket(port)){
             Socket connection;
             while ((connection = welcomeSocket.accept()) != null) {
+                System.out.println("Waiting request...");
                 Socket finalConnection = connection;
                 // set task to new thread & execute controller
                 service.submit(() -> {
@@ -36,7 +39,9 @@ public class DVMSimulationServer {
                         String method = startLines[0];
                         String url = startLines[1];
 
-                        dos.writeChars("Hello! -> " + method + " : " + url);
+                        dos.writeBytes("HTTP/1.1 200 OK \r\n");
+                        dos.writeBytes("Content Type: text/html;charset=utf-8 \r\n\r\n");
+                        dos.writeBytes("Hello! -> " + method + " : " + url);
                         dos.flush();
                     } catch (IOException e) {
                         throw new RuntimeException(e);
