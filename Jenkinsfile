@@ -22,7 +22,7 @@ pipeline {
         stage('Test') {
             steps {
                 sh 'echo "Testing..."'
-                // 테스트 스크립트 추가합니다
+                // 테스트 스크립트 추가합니다!
             }
         }
         stage('Deploy') {
