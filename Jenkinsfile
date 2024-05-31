@@ -75,15 +75,15 @@ pipeline {
         
         stage('Build') {
             steps {
-                sh 'echo build start'
-                sh './gradlew build'  // 실제 빌드 명령어를 여기에 추가하세요
+                sh 'chmod +x ./gradlew'  // gradlew 파일에 실행 권한 추가
+                sh './gradlew build'     // 빌드 실행
             }
         }
         
         stage('Test') {
             steps {
                 sh 'echo Testing...'
-                sh './gradlew test'  // 실제 테스트 명령어를 여기에 추가하세요
+                sh './gradlew test'  // 실제 테스트 명령어를 여기에 추가
             }
         }
         
