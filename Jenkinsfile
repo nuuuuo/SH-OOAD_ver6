@@ -14,8 +14,10 @@ pipeline {
         
         stage('Build') {
             steps {
-                sh 'echo "Building..."'
-                ./gradlew clean bootJar
+                 sh '''
+                        echo build start
+                        ./gradlew clean bootJar
+                    '''
             }
         }
         stage('Test') {
