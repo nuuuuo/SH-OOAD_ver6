@@ -89,9 +89,9 @@ pipeline {
         
         stage('Deploy') {
             steps {
-                sshagent(['your-credentials-id']) {
+                sshagent(['tintin010']) {
                     sh '''
-                    ssh -o StrictHostKeyChecking=no ec2-user@your-ec2-instance-public-dns <<EOF
+                    ssh -o StrictHostKeyChecking=no ec2-user@ec2-43-202-61-53.ap-northeast-2.compute.amazonaws.com <<EOF
                     cd /path/to/deployment/directory
                     cp /path/to/build/libs/*.jar ./
                     currentPid=$(ps -ef | grep java | grep dokotlin | awk '{print $2}')
