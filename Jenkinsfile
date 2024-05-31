@@ -92,7 +92,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 sshagent(['tintin010']) {
-                    sh """
+                    sh '''
                     ssh -o StrictHostKeyChecking=no ec2-user@ec2-43-202-61-53.ap-northeast-2.compute.amazonaws.com <<EOF
                     sudo mkdir -p /home/ec2-user/deploy
                     sudo chmod -R 777 /home/ec2-user/deploy
@@ -104,8 +104,7 @@ pipeline {
                         sleep 10
                     fi
                     nohup java -jar *.jar >> application.log 2>&1 &
-                    EOF
-                    """
+                    '''
                 }
             }
         }
