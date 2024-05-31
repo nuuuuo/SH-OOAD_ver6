@@ -31,7 +31,7 @@ pipeline {
                 sh 'cp /path/to/your/application/build/libs/*.jar /home/ec2-user/deploy/'
         
                 // 배포 디렉토리의 권한을 확인합니다.
-                sh 'ls -l /home/ec2-user/deploy/'
+                // sh 'ls -l /home/ec2-user/deploy/'
         
                 // 현재 구동 중인 애플리케이션을 종료합니다.
                 script {
@@ -43,7 +43,7 @@ pipeline {
                 }
         
                 // 새로운 애플리케이션을 실행합니다.
-                sh 'nohup java -jar /home/ec2-user/deploy/*.jar >> /home/ec2-user/deploy/application.log 2>&1 &'
+                // sh 'nohup java -jar /home/ec2-user/deploy/*.jar >> /home/ec2-user/deploy/application.log 2>&1 &'
             }
         }
     }
