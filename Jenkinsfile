@@ -49,10 +49,14 @@ pipeline {
             echo 'Build, test, and deploy succeeded!'
         }
         failure {
-            echo 'Build, test, or deploy failed!'
+            mail to: 'team@example.com',
+                 subject: "Failed Build ${currentBuild.fullDisplayName}",
+                 body: "The build FAILED: Check console output at ${env.BUILD_URL} to view the results."
         }
         always {
-            echo 'End of pipeline'
+            mail to: 'team@example.com',
+                 subject: "Build ${currentBuild.fullDisplayName}",
+                 body: "The build was ${currentBuild.result}: Check console output at ${env.BUILD_URL} to view the results."
         }
     }
 }
