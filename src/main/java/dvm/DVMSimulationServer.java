@@ -1,5 +1,8 @@
 package dvm;
 
+import controller.Controller;
+
+import javax.xml.crypto.Data;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -35,7 +38,13 @@ public class DVMSimulationServer {
                         String[] startLines = startLine.split(" ");
                         String url = startLines[1];
 
-                        mapper.getController(url).execute(url, finalConnection);
+                        Controller controller = mapper.getController(url);
+                        if(controller == null) {
+                            DataOutputStream dos =  new DataOutputStream(finalConnection.getOutputStream());
+                            dos.writeBytes(("HTTP/1.1 200 OK \r\n Content Type: text/html;charset=utf-8 \r\n\r\n Error"));
+                            dos.flush();
+                            dos.close();
+                        } else controller.execute(url, br, os);
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }

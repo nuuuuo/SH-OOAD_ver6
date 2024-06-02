@@ -1,7 +1,11 @@
 package controller;
 
 import data.Card;
+
+import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.Socket;
 
 public class PayController implements Controller {
@@ -13,7 +17,7 @@ public class PayController implements Controller {
     private Card card;
 
     @Override
-    public void execute(String url, Socket connection) {
+    public void execute(String url, BufferedReader br, OutputStream os) {
         // TODO implement here
     }
 
