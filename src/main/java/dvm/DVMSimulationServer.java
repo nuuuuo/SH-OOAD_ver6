@@ -8,8 +8,6 @@ import java.util.concurrent.Executors;
 
 public class DVMSimulationServer {
 
-    private ControllerMapper controllerMapper;
-
     public static void main(String[] args) {
         ControllerMapper mapper = new ControllerMapper();
 
@@ -32,17 +30,12 @@ public class DVMSimulationServer {
                     try(InputStream is = finalConnection.getInputStream();
                         OutputStream os = finalConnection.getOutputStream()) {
                         BufferedReader br = new BufferedReader(new InputStreamReader(is));
-                        DataOutputStream dos = new DataOutputStream(os);
 
                         String startLine = br.readLine();
                         String[] startLines = startLine.split(" ");
-                        String method = startLines[0];
                         String url = startLines[1];
 
-                        dos.writeBytes("HTTP/1.1 200 OK \r\n");
-                        dos.writeBytes("Content Type: text/html;charset=utf-8 \r\n\r\n");
-                        dos.writeBytes("Hello World! -> " + method + " : " + url);
-                        dos.flush();
+                        mapper.getController(url).execute(url, finalConnection);
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
