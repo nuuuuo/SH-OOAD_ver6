@@ -1,5 +1,8 @@
 package dvm;
 
+import controller.Controller;
+
+import javax.xml.crypto.Data;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -7,8 +10,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class DVMSimulationServer {
-
-    private ControllerMapper controllerMapper;
 
     public static void main(String[] args) {
         ControllerMapper mapper = new ControllerMapper();
@@ -32,17 +33,18 @@ public class DVMSimulationServer {
                     try(InputStream is = finalConnection.getInputStream();
                         OutputStream os = finalConnection.getOutputStream()) {
                         BufferedReader br = new BufferedReader(new InputStreamReader(is));
-                        DataOutputStream dos = new DataOutputStream(os);
 
                         String startLine = br.readLine();
                         String[] startLines = startLine.split(" ");
-                        String method = startLines[0];
                         String url = startLines[1];
 
-                        dos.writeBytes("HTTP/1.1 200 OK \r\n");
-                        dos.writeBytes("Content Type: text/html;charset=utf-8 \r\n\r\n");
-                        dos.writeBytes("Hello World! -> " + method + " : " + url);
-                        dos.flush();
+                        Controller controller = mapper.getController(url);
+                        if(controller == null) {
+                            DataOutputStream dos =  new DataOutputStream(finalConnection.getOutputStream());
+                            dos.writeBytes(("HTTP/1.1 200 OK \r\n Content Type: text/html;charset=utf-8 \r\n\r\n Error"));
+                            dos.flush();
+                            dos.close();
+                        } else controller.execute(url, br, os);
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }

@@ -1,9 +1,9 @@
 package controller;
 
-import java.net.Socket;
+import java.io.*;
 
 public interface Controller {
 
-    public void execute(String url, Socket connection);
+    public void execute(String url, BufferedReader br, OutputStream os) throws IOException;
 
 }

@@ -1,12 +1,15 @@
 package controller;
 
+import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.Socket;
 
 public class AdminController implements Controller {
 
     @Override
-    public void execute(String url, Socket connection) {
+    public void execute(String url, BufferedReader br, OutputStream os) {
         // TODO implement here
     }
 
