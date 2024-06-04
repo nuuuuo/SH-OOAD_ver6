@@ -16,8 +16,9 @@ public class AdminDBManager implements DBManager {
         return manager;
     }
 
-    public void checkUser(AdminAccount account) {
+    public boolean checkUser(AdminAccount account) {
         // TODO implement here
-    }
+        return false;
+    }////////////checkUser의 리턴값을 void -> boolean으로 변경
 
 }
