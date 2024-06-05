@@ -1,17 +1,19 @@
 package manager;
 
 import data.AdminAccount;
+import db.AdminDBManager;
 
 public class AdminAccountManager {
 
     public boolean checkUser(AdminAccount account) {
         // TODO implement here
-        return false;
+        AdminDBManager adminDBManager = AdminDBManager.getManager();
+        return adminDBManager.checkUser(account);
     }
 
     public boolean logout() {
         // TODO implement here
-        return false;
-    }
+        return true;
+    }////////이게 끝인가...?
 
 }
