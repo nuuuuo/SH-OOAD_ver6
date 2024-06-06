@@ -23,7 +23,7 @@ pipeline {
             }
             post {
                 always {
-                    junit '**/build/test-results/test/*.xml'  // JUnit 테스트 결과 파일 경로
+                    junit '**/build/test-results/test/*.xml'  // JUnit 테스트 결과 파일 경로..
                 }
             }
         }
