@@ -32,7 +32,7 @@ pipeline {
             steps {
                 sshagent(['tintin010']) {
                     sh '''
-                    ssh -o StrictHostKeyChecking=no ec2-user@ec2-43-202-61-53.ap-northeast-2.compute.amazonaws.com <<EOF
+                    ssh -o StrictHostKeyChecking=no ec2-user@ec2-13-124-36-229.ap-northeast-2.compute.amazonaws.com <<EOF
                     sudo mkdir -p /home/ec2-user/deploy
                     sudo chmod -R 777 /home/ec2-user/deploy
                     cd /home/ec2-user/deploy  # 실제 배포 디렉토리 경로
