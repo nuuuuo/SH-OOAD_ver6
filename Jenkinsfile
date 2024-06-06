@@ -21,6 +21,11 @@ pipeline {
                 sh 'echo Testing...'
                 sh './gradlew test'  // 실제 테스트 명령어를 여기에 추가
             }
+            post {
+                always {
+                    junit '**/build/test-results/test/*.xml'  // JUnit 테스트 결과 파일 경로
+                }
+            }
         }
         
         stage('Deploy') {
