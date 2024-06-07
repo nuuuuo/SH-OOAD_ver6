@@ -119,7 +119,8 @@ public class DrinkDBManager implements DBManager {
                         selectedDrink = new Drink(parseInt(drinkType), parts[1], parseInt(parts[2]), drinkNum);
                     } else {
                         // 요청한 수량보다 재고가 적은 경우
-                        selectedDrink = new Drink(parseInt(drinkType), parts[1], parseInt(parts[2]), quantity);
+//                        selectedDrink = new Drink(parseInt(drinkType), parts[1], parseInt(parts[2]), quantity);
+                        return null;
                     }
                 } else {
                     sb.append(line).append("\n");
