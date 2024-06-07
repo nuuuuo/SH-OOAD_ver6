@@ -38,7 +38,7 @@ public class DVMSimulationServer {
                         String startLine = "";
                         char c = (char) br.read();
                         if(c == '{') {
-                            url = "message";
+                            url = "/message";
                         } else startLine = br.readLine();
                         System.out.println(startLine);
                         String[] startLines = startLine.split(" ");

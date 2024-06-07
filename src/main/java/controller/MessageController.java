@@ -24,6 +24,7 @@ public class MessageController implements Controller {
     public void execute(String url, BufferedReader br, OutputStream os) throws IOException {
         DataOutputStream dos = new DataOutputStream(os);
 
+        System.out.println(url);
         StringBuilder sb = new StringBuilder();
         char c;
         while ((c = (char) br.read()) != '}') {
