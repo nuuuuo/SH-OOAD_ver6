@@ -35,6 +35,7 @@ public class MessageController implements Controller {
         System.out.println(result);
         dos.writeBytes("hello1");
         dos.flush();
+
         JSONObject jsonObject = new JSONObject(result);
         String msgType = (String) jsonObject.get("msg_type");
         System.out.println(msgType);

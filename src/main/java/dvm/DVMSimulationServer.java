@@ -53,6 +53,7 @@ public class DVMSimulationServer {
                             dos.close();
                         } else controller.execute(url, br, os);
                     } catch (IOException e) {
+                        e.printStackTrace();
                         throw new RuntimeException(e);
                     }
                 });
