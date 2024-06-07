@@ -44,7 +44,7 @@ public class DVMSimulationServer {
                         Controller controller = mapper.getController(url);
                         if(controller == null) {
                             DataOutputStream dos =  new DataOutputStream(finalConnection.getOutputStream());
-                            dos.writeBytes(("HTTP/1.1 200 OK \r\n Content Type: text/html;charset=utf-8 \r\n\r\n Error"));
+                            dos.writeBytes(("HTTP/1.1 200 OK \r\n Content Type: text/html;charset=utf-8 \r\n\r\n Error wron url"));
                             dos.flush();
                             dos.close();
                         } else controller.execute(url, br, os);
