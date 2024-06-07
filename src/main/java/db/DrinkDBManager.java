@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.Integer.parseInt;
+
 public class DrinkDBManager implements DBManager {
 
     private String dbPath = "src/main/resources/stock.txt";
@@ -75,8 +77,8 @@ public class DrinkDBManager implements DBManager {
                     continue;
                 }
                 String[] parts = line.split(" ");
-                if (parts.length >= 4 && parts[1].equalsIgnoreCase(drinkType)) {
-                    int quantity = Integer.parseInt(parts[3]);
+                if (parts.length >= 4 && parts[0].equals(drinkType)) {
+                    int quantity = parseInt(parts[3]);
                     return quantity >= drinkNum;
                 }
             }
@@ -107,17 +109,17 @@ public class DrinkDBManager implements DBManager {
                     continue;
                 }
                 String[] parts = line.split(" ");
-                if (parts.length >= 4 && parts[1].equalsIgnoreCase(drinkType)) {
-                    int quantity = Integer.parseInt(parts[3]);
+                if (parts.length >= 4 && parts[0].equals(drinkType)) {
+                    int quantity = parseInt(parts[3]);
                     if (quantity >= drinkNum) {
                         // 해당 음료의 수량을 차감
                         quantity -= drinkNum;
                         sb.append(parts[0]).append(" ").append(parts[1]).append(" ").append(parts[2]).append(" ").append(quantity).append("\n");
                         updated = true;
-                        selectedDrink = new Drink(Integer.parseInt(parts[0]), drinkType, Integer.parseInt(parts[2]), drinkNum);
+                        selectedDrink = new Drink(parseInt(drinkType), parts[1], parseInt(parts[2]), drinkNum);
                     } else {
                         // 요청한 수량보다 재고가 적은 경우
-                        selectedDrink = new Drink(Integer.parseInt(parts[0]), drinkType, Integer.parseInt(parts[2]), quantity);
+                        selectedDrink = new Drink(parseInt(drinkType), parts[1], parseInt(parts[2]), quantity);
                     }
                 } else {
                     sb.append(line).append("\n");
@@ -143,8 +145,8 @@ public class DrinkDBManager implements DBManager {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split(" ");
-                if (parts.length >= 4 && parts[1].equalsIgnoreCase(drinkType)) {
-                    return Integer.parseInt(parts[3]);
+                if (parts.length >= 4 && parts[0].equals(drinkType)) {
+                    return parseInt(parts[3]);
                 }
             }
         } catch (IOException e) {
@@ -173,7 +175,7 @@ public class DrinkDBManager implements DBManager {
                     continue;
                 }
                 String[] parts = line.split(" ");
-                if (parts.length >= 4 && parts[1].equalsIgnoreCase(drinkType)) {
+                if (parts.length >= 4 && parts[0].equals(drinkType)) {
                     sb.append(parts[0]).append(" ").append(parts[1]).append(" ").append(parts[2]).append(" ").append(drinkNum).append("\n");
                     updated = true;
                 } else {
@@ -208,10 +210,10 @@ public class DrinkDBManager implements DBManager {
                 if (readingMachineStock) {
                     String[] parts = line.split(" ");
                     if (parts.length >= 4) {
-                        int id = Integer.parseInt(parts[0]);
+                        int id = parseInt(parts[0]);
                         String name = parts[1];
-                        int price = Integer.parseInt(parts[2]);
-                        int quantity = Integer.parseInt(parts[3]);
+                        int price = parseInt(parts[2]);
+                        int quantity = parseInt(parts[3]);
                         drinks.add(new Drink(id, name, price, quantity));
                     }
                 }
@@ -234,10 +236,10 @@ public class DrinkDBManager implements DBManager {
                 }
                 String[] parts = line.split(" ");
                 if (parts.length >= 3) {
-                    int id = Integer.parseInt(parts[0]);
+                    int id = parseInt(parts[0]);
                     String name = parts[1];
-                    int price = Integer.parseInt(parts[2]);
-                    int quantity = parts.length >= 4 ? Integer.parseInt(parts[3]) : 0; // 수량이 없으면 0으로 초기화
+                    int price = parseInt(parts[2]);
+                    int quantity = parts.length >= 4 ? parseInt(parts[3]) : 0; // 수량이 없으면 0으로 초기화
                     menuList.add(new Drink(id, name, price, quantity));
                 }
             }
