@@ -56,7 +56,7 @@ public class MessageControllerTest {
                 "  \"dst_id\": \"0\",\n" +
                 "  \"msg_content\": {\n" +
                 "    \"item_code\": \"05\",\n" +
-                "    \"item_num\": 25,\n" +
+                "    \"item_num\": 5,\n" +
                 "    \"cert_code\": \"cxf01\"\n" +
                 "  }\n" +
                 "}";
@@ -78,7 +78,7 @@ public class MessageControllerTest {
         assertEquals(map.get("dst_id").toString(), "Team1", "request drink quantity method failed!");
 
         assertEquals(content.get("item_code").toString(), "05", "request drink quantity method failed!");
-        assertEquals(content.get("item_num"), 25.0, "request drink quantity method failed!");
+        assertEquals(content.get("item_num"), 5.0, "request drink quantity method failed!");
         assertEquals(content.get("availability"), false, "request drink quantity method failed!");
     }
 
