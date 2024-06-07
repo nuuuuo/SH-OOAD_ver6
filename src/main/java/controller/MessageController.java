@@ -34,13 +34,13 @@ public class MessageController implements Controller {
         result = '{' + result;
         System.out.println(result);
         dos.writeBytes("hello1");
-        dos.flush();
+        //dos.flush();
 
         JSONObject jsonObject = new JSONObject(result);
         String msgType = (String) jsonObject.get("msg_type");
         System.out.println(msgType);
         dos.writeBytes("hello2");
-        dos.flush();
+        //dos.flush();
 
         if(Objects.equals(msgType, "req_stock"))
             reqDrinkQuantity(dos, result);
