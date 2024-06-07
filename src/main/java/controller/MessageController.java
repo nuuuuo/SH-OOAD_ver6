@@ -31,6 +31,7 @@ public class MessageController implements Controller {
         }
         String result = sb.toString();
         result = "{" + result + "}}";
+        System.out.println(result);
         Gson gson = new Gson();
         Map<String, Object> map = gson.fromJson(result, Map.class);
         String msgType = (String) map.get("msg_type");
