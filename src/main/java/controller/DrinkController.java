@@ -1,11 +1,9 @@
 package controller;
 
+import com.google.gson.Gson;
 import manager.DrinkManager;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.Socket;
 import java.util.List;
 
@@ -16,12 +14,19 @@ public class DrinkController implements Controller {
     public DrinkManager drinkManager;
 
     @Override
-    public void execute(String url, BufferedReader br, OutputStream os) {
-        // TODO implement here
+    public void execute(String url, BufferedReader br, OutputStream os) throws IOException {
+        DataOutputStream dos = new DataOutputStream(os);
+        getMenuList(dos, "");
     }
 
-    private void getMenuList(DataOutputStream dos, String body) {
-        // TODO implement here
+    private void getMenuList(DataOutputStream dos, String body) throws IOException {
+        DrinkManager manager = new DrinkManager();
+        List list = manager.getMenuInfo();
+        Gson gson = new Gson();
+        String json = gson.toJson(list);
+
+        dos.writeBytes(json);
+        dos.flush();
     }
 
 }
