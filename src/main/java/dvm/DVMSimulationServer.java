@@ -34,19 +34,21 @@ public class DVMSimulationServer {
                         OutputStream os = finalConnection.getOutputStream()) {
                         BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
-                        String startLine = br.readLine();
+                        String url = "";
+                        String startLine = "";
+                        char c = (char) br.read();
+                        if(c == '{') {
+                            url = "message";
+                        } else startLine = br.readLine();
                         System.out.println(startLine);
                         String[] startLines = startLine.split(" ");
-                        String url = startLines[1];
+                        if(url.isBlank()) url = startLines[1];
                         System.out.println(url);
-                        if(startLine.startsWith("{")) {
-                            url = "message";
-                        }
 
                         Controller controller = mapper.getController(url);
                         if(controller == null) {
                             DataOutputStream dos =  new DataOutputStream(finalConnection.getOutputStream());
-                            dos.writeBytes(("HTTP/1.1 200 OK \r\n Content Type: text/html;charset=utf-8 \r\n\r\n Error wron url"));
+                            dos.writeBytes(("HTTP/1.1 200 OK \r\n Content Type: text/html;charset=utf-8 \r\n\r\n Error wrong url"));
                             dos.flush();
                             dos.close();
                         } else controller.execute(url, br, os);
