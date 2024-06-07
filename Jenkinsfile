@@ -32,18 +32,18 @@ pipeline {
             steps {
                 sshagent(['tintin010']) {
                     sh '''
-                    ssh -o StrictHostKeyChecking=no ec2-user@ec2-13-124-36-229.ap-northeast-2.compute.amazonaws.com <<EOF
-                    sudo mkdir -p /home/ec2-user/deploy
-                    sudo chmod -R 777 /home/ec2-user/deploy
-                    cd /home/ec2-user/deploy  # 실제 배포 디렉토리 경로
-                    cp /var/lib/jenkins/workspace/jenkins0531/build/libs/*.jar .  # 실제 빌드 파일 경로
-                    currentPid=$(ps -ef | grep java | grep dokotlin | awk '{print $2}')
-                    if [ -n "$currentPid" ]; then
-                        kill -9 $currentPid
-                        sleep 10
-                    fi
-                    nohup java -jar *.jar >> application.log 2>&1 &
-                    EOF
+                        ssh -o StrictHostKeyChecking=no ec2-user@ec2-13-124-36-229.ap-northeast-2.compute.amazonaws.com <<EOF
+                        sudo mkdir -p /home/ec2-user/deploy
+                        sudo chmod -R 777 /home/ec2-user/deploy
+                        cd /home/ec2-user/deploy  # 실제 배포 디렉토리 경로
+                        cp /var/lib/jenkins/workspace/jenkins0531/build/libs/*.jar .  # 실제 빌드 파일 경로
+                        currentPid=$(ps -ef | grep java | grep dokotlin | awk '{print $2}')
+                        if [ -n "$currentPid" ]; then
+                            kill -9 $currentPid
+                            sleep 10
+                        fi
+                        nohup java -jar *.jar >> application.log 2>&1 &
+                        EOF
                     '''
                 }
             }
