@@ -7,7 +7,7 @@ import java.util.Random;
 
 public class VerificationManager {
 
-    public String getVerificationCode(String drinkType, int drinkNum) {
+    public String getVerificationCode() {
         // TODO implement here
         StringBuilder stringBuilder = new StringBuilder();
 

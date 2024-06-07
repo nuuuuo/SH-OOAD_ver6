@@ -16,16 +16,19 @@ public class DrinkController implements Controller {
     @Override
     public void execute(String url, BufferedReader br, OutputStream os) throws IOException {
         DataOutputStream dos = new DataOutputStream(os);
-        getMenuList(dos, "");
+        getMenuList(dos, url);
     }
 
     private void getMenuList(DataOutputStream dos, String body) throws IOException {
+        dos.writeBytes(("HTTP/1.1 200 OK \r\n Content Type: text/json;charset=utf-8 \r\n\r\n"));
+
         DrinkManager manager = new DrinkManager();
         List list = manager.getMenuInfo();
         Gson gson = new Gson();
         String json = gson.toJson(list);
+        System.out.println(json);
 
-        dos.writeBytes(json);
+        dos.writeUTF(json);
         dos.flush();
     }
 
