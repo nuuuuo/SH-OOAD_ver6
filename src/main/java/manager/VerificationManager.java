@@ -7,7 +7,7 @@ import java.util.Random;
 
 public class VerificationManager {
 
-    public String getVerificationCode() {
+    public String getVerificationCode(String drinkType, int drinkNum) {
         // TODO implement here
         StringBuilder stringBuilder = new StringBuilder();
 
@@ -31,10 +31,13 @@ public class VerificationManager {
             VerificationCode verifyCodeResult = verifyCode(tempCode);
 
             if(verifyCodeResult.getCode().isEmpty() && verifyCodeResult.getDrinkType().isEmpty() && verifyCodeResult.getDrinkNum()==0){ //중복 인증코드 없음
-                boolean codeSaveSuccessResult = saveCode(tempCode); //인증코드 저장
+                VerificationCode verificationCode = new VerificationCode(tempCode, drinkType, drinkNum);
+                boolean codeSaveSuccessResult = saveCode(verificationCode); //인증코드 저장
 
                 if(codeSaveSuccessResult){ //코드 저장 성공 여부 확인
                     break; //코드 저장 성공
+                }else{
+
                 }
                 //코드 저장 실패. 코드 재생성 필요함
             }
@@ -43,12 +46,12 @@ public class VerificationManager {
         }
 
         return stringBuilder.toString();
-    }
+    }////////VerificationManage의 getVerificationCode 매개변수를 void -> String drinkType, int drinkNum 로 바꿔야 함
 
-    public boolean saveCode(String code) {
+    public boolean saveCode(VerificationCode verificationCode) {
         // TODO implement here
         VerificationCodeDBManager verificationCodeDBManager = VerificationCodeDBManager.getManager();
-        return verificationCodeDBManager.saveCode(code); //verificationCodeDBManager에게 인증코드 저장 요청
+        return verificationCodeDBManager.saveCode(verificationCode); //verificationCodeDBManager에게 인증코드 저장 요청
     }
 
     public VerificationCode verifyCode(String code) {
