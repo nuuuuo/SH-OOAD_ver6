@@ -27,11 +27,10 @@ public class MessageController implements Controller {
         System.out.println(url);
         StringBuilder sb = new StringBuilder();
         char c;
-        String line = br.readLine();
-//        while ((c = (char) br.read()) != '') {
+        //        while ((c = (char) br.read()) != '') {
 //            sb.append(c);
 //        }
-        String result = line;
+        String result = br.readLine();
         result = "{" + result;
         System.out.println(result);
         Gson gson = new Gson();
