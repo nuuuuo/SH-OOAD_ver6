@@ -33,9 +33,14 @@ public class MessageController implements Controller {
         String result = br.readLine();
         result = "{" + result;
         System.out.println(result);
+        dos.writeBytes("hello1");
+        dos.flush();
         Gson gson = new Gson();
         Map<String, Object> map = gson.fromJson(result, Map.class);
         String msgType = (String) map.get("msg_type");
+        System.out.println(msgType);
+        dos.writeBytes("hello2");
+        dos.flush();
 
         if(Objects.equals(msgType, "req_stock"))
             reqDrinkQuantity(dos, result);
