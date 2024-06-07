@@ -37,6 +37,9 @@ public class DVMSimulationServer {
                         String startLine = br.readLine();
                         String[] startLines = startLine.split(" ");
                         String url = startLines[1];
+                        if(startLine.startsWith("{")) {
+                            url = "message";
+                        }
 
                         Controller controller = mapper.getController(url);
                         if(controller == null) {
