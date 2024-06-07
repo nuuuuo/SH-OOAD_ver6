@@ -35,6 +35,7 @@ public class DVMSimulationServer {
                         BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
                         String startLine = br.readLine();
+                        System.out.println(startLine);
                         String[] startLines = startLine.split(" ");
                         String url = startLines[1];
                         System.out.println(url);
