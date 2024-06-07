@@ -48,6 +48,8 @@ public class MessageController implements Controller {
         Map<String, Object> map = gson.fromJson(body, Map.class);
         Map<String, Object> content = gson.fromJson(map.get("msg_content").toString(), Map.class);
 
+        System.out.println("req: " + body);
+
         String msg_type = "resp_stock";
         String src_id = "Team2";
         String dst_id = map.get("src_id").toString();
@@ -62,6 +64,7 @@ public class MessageController implements Controller {
                 "{ \"msg_type\": \"%s\", \"src_id\": \"%s\", \"dst_id\": \"%s\", \"msg_content\": { \"item_code\": \"%s\", \"item_num\": %d, \"coor_x\": %d, \"coor_y\": %d } }",
                 msg_type, src_id, dst_id, item_code, item_num, coor_x, coor_y
         );
+        System.out.println(jsonString);
 
         dos.writeBytes(jsonString);
         dos.flush();
