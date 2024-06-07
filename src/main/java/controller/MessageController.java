@@ -31,7 +31,7 @@ public class MessageController implements Controller {
 //            sb.append(c);
 //        }
         String result = br.readLine();
-        result = "{" + result;
+        result = '{' + result;
         System.out.println(result);
         dos.writeBytes("hello1");
         dos.flush();
