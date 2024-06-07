@@ -19,7 +19,7 @@ pipeline {
         stage('Test') {
             steps {
                 sh 'echo Testing...'
-                sh './gradlew test'  // 실제 테스트 명령어를 여기에 추가
+                sh './gradlew test'  // 실제 테스트 명령어를 여기에 추가.
             }
             post {
                 always {
