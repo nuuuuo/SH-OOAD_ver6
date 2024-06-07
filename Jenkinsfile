@@ -12,7 +12,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'chmod +x ./gradlew'  // gradlew 파일에 실행 권한 추가
-                sh './gradlew build'     // 빌드 실행
+                sh './gradlew build'     // 빌드 실행 .
             }
         }
         
