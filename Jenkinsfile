@@ -43,6 +43,7 @@ pipeline {
                         sleep 10
                     fi
                     nohup java -jar *.jar >> application.log 2>&1 &
+                    EOF
                     '''
                 }
             }
