@@ -1,6 +1,6 @@
 package controller;
 
-import com.google.gson.Gson;
+import org.json.JSONObject;
 import data.DVM;
 import data.VerificationCode;
 import manager.DrinkManager;
@@ -35,9 +35,8 @@ public class MessageController implements Controller {
         System.out.println(result);
         dos.writeBytes("hello1");
         dos.flush();
-        Gson gson = new Gson();
-        Map<String, Object> map = gson.fromJson(result, Map.class);
-        String msgType = (String) map.get("msg_type");
+        JSONObject jsonObject = new JSONObject(result);
+        String msgType = (String) jsonObject.get("msg_type");
         System.out.println(msgType);
         dos.writeBytes("hello2");
         dos.flush();
@@ -49,15 +48,14 @@ public class MessageController implements Controller {
     }
 
     private void reqDrinkQuantity(DataOutputStream dos, String body) throws IOException {
-        Gson gson = new Gson();
-        Map<String, Object> map = gson.fromJson(body, Map.class);
-        Map<String, Object> content = gson.fromJson(map.get("msg_content").toString(), Map.class);
+        JSONObject jsonObject = new JSONObject(body);
+        JSONObject content = jsonObject.getJSONObject("msg_content");
 
         System.out.println("req: " + body);
 
         String msg_type = "resp_stock";
         String src_id = "Team2";
-        String dst_id = map.get("src_id").toString();
+        String dst_id = jsonObject.get("src_id").toString();
         String item_code = content.get("item_code").toString();
 
         DrinkManager manager = new DrinkManager();
@@ -76,13 +74,12 @@ public class MessageController implements Controller {
     }
 
     private void reqAdvancePayment(DataOutputStream dos, String body) throws IOException {
-        Gson gson = new Gson();
-        Map<String, Object> map = gson.fromJson(body, Map.class);
-        Map<String, Object> content = gson.fromJson(map.get("msg_content").toString(), Map.class);
+        JSONObject jsonObject = new JSONObject(body);
+        JSONObject content = jsonObject.getJSONObject("msg_content");
 
         String msg_type = "resp_stock";
         String src_id = "Team2";
-        String dst_id = map.get("src_id").toString();
+        String dst_id = jsonObject.get("src_id").toString();
         String item_code = content.get("item_code").toString();
         int item_num = (int)(double) content.get("item_num");
         boolean availability;
