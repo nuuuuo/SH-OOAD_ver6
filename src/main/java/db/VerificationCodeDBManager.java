@@ -22,11 +22,11 @@ public class VerificationCodeDBManager implements DBManager {
             try {
                 FileWriter fileWriter = new FileWriter(dbPath);
                 fileWriter.write(
-                        "콜라 10 asd123asd1\n" +
-                                "사이다 10 asd123asd2\n" +
-                                "홍차 10 asd123asd3\n" +
-                                "녹차 10 asd123asd4\n" +
-                                "밀크티 10 asd123asd5\n");
+                        "asd123asd1 콜라 10\n" +
+                                "asd123asd2 사이다 10\n" +
+                                "asd123asd3 홍차 10\n" +
+                                "asd123asd4 녹차 10\n" +
+                                "asd123asd5 밀크티 10\n");
                 fileWriter.close();
             } catch (IOException ex) {
                 ex.printStackTrace();
@@ -38,14 +38,14 @@ public class VerificationCodeDBManager implements DBManager {
         return manager;
     }
 
-    public VerificationCode checkCode(String code) {
+    public VerificationCode checkCode(String code) { // 코드가 존재하면 VerificationCode 객체를 반환하고, 존재하지 않으면 null을 반환
         try (BufferedReader reader = new BufferedReader(new FileReader(dbPath))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(" ");
-                if (parts.length == 3 && parts[2].equals(code)) {
-                    String drinkType = parts[0];
-                    int drinkNum = Integer.parseInt(parts[1]);
+                if (parts.length == 3 && parts[0].equals(code)) {
+                    String drinkType = parts[1];
+                    int drinkNum = Integer.parseInt(parts[2]);
                     return new VerificationCode(code, drinkType, drinkNum);
                 }
             }
@@ -56,12 +56,12 @@ public class VerificationCodeDBManager implements DBManager {
     }
 
     public Boolean saveCode(VerificationCode code) {
-        if (checkCode(code.getCode()) != null) {
+        if (checkCode(code.getCode()) != null) { //코드가 이미 존재함
             return false;
         }
 
         try (FileWriter fileWriter = new FileWriter(dbPath, true)) {
-            fileWriter.write(code.getDrinkType() + " " + code.getDrinkNum() + " " + code.getCode() + "\n");
+            fileWriter.write(code.getCode() + " " + code.getDrinkType() + " " + code.getDrinkNum() + "\n");
             return true;
         } catch (IOException e) {
             e.printStackTrace();

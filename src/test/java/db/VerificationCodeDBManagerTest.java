@@ -30,11 +30,11 @@ class VerificationCodeDBManagerTest {
 
         // Set up the test database file
         try (FileWriter fileWriter = new FileWriter(ORIGINAL_DB_PATH)) {
-            fileWriter.write("콜라 10 asd123asd1\n" +
-                    "사이다 10 asd123asd2\n" +
-                    "홍차 10 asd123asd3\n" +
-                    "녹차 10 asd123asd4\n" +
-                    "밀크티 10 asd123asd5\n");
+            fileWriter.write("asd123asd1 콜라 10\n" +
+                    "asd123asd2 사이다 10\n" +
+                    "asd123asd3 홍차 10\n" +
+                    "asd123asd4 녹차 10\n" +
+                    "asd123asd5 밀크티 10\n");
         } catch (IOException e) {
             e.printStackTrace();
             fail("Failed to set up test database file.");
